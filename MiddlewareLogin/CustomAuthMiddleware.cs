@@ -17,12 +17,11 @@
             }
             else if (requestMethod == "POST")
             {
-                string[] errorMessages = new string[] { };
+                List<string> errorMessages = new List<string>();
                 string? username = context.Request.Query["username"];
                 string? password = context.Request.Query["password"];
                 bool usernameIsValid = true;
                 bool passwordIsValid = true;
-
 
                 if (context.Request.Method == "GET")
                 {
@@ -32,7 +31,7 @@
                 {
                     if (username == null)
                     {
-                        errorMessages.Append("Invalid input for username");
+                        errorMessages.Add("Invalid input for username");
                     }
                     else if (username != "admin@example.com")
                     {
@@ -41,19 +40,19 @@
 
                     if (password == null)
                     {
-                        errorMessages.Append("Invalid input for password");
+                        errorMessages.Add("Invalid input for password");
                     }
                     else if (password != "admin1234")
                     {
                         passwordIsValid = false;
                     }
 
-                    if (errorMessages.Length == 0 && (!passwordIsValid || !usernameIsValid))
+                    if (errorMessages.Count == 0 && (!passwordIsValid || !usernameIsValid))
                     {
-                        errorMessages.Append("Invalid Login");
+                        errorMessages.Add("Invalid Login");
                     }
 
-                    if (errorMessages.Length > 0)
+                    if (errorMessages.Count > 0)
                     {
                         context.Response.StatusCode = 400; // Unauthorized
                         await context.Response.WriteAsync(string.Join("\n", errorMessages));
@@ -66,7 +65,16 @@
                         return;
                     }
                 }
+                await _next(context); // Call the next middleware in the pipeline
             }
+        }
+    }
+
+    public static class  CustomAuthMiddlewareExtension
+    {
+        public static void UseCustomAuthMiddleware(this IApplicationBuilder builder)
+        {
+            builder.UseMiddleware<CustomAuthMiddleware>();
         }
     }
 }
