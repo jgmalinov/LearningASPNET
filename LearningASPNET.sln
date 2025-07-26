@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36203.30 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netcorefundamentals", "netcorefundamentals\netcorefundamentals.csproj", "{6CB9CAC7-7969-44A9-B4C3-B144316398CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareLogin", "MathAppHTTP\MiddlewareLogin.csproj", "{8280AD62-23FF-4D14-9AFA-E1E0D9B653D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareLogin", "MiddlewareLogin\MiddlewareLogin.csproj", "{8280AD62-23FF-4D14-9AFA-E1E0D9B653D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
