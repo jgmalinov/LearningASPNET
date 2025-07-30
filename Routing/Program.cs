@@ -10,7 +10,7 @@ app.Use(async (context, next) =>
     if (endpoint != null)
     {
         // Log the endpoint name
-        context.Response.WriteAsync($"Endpoint: {endpoint.DisplayName}");
+        context.Response.WriteAsync($"Endpoint: {endpoint.DisplayName}\n ");
     }
     else
     {
@@ -54,6 +54,45 @@ app.UseEndpoints(endpoints =>
             return context.Response.WriteAsync("Invalid court case request");
         }
     });
+    endpoints.MapGet("/optional/{id?}", (HttpContext context) =>
+    {
+        int id = Convert.ToInt32(context.Request.RouteValues["id"]);
+        return context.Response.WriteAsync($"Optional ID: {id}");
+    });
+});
+
+// Map a route with a DateTime parameter
+app.Map("/dates/{date:datetime}", (HttpContext context) =>
+{
+    DateTime date = Convert.ToDateTime(context.Request.RouteValues["date"]);
+    return context.Response.WriteAsync($"Date requested: {date.ToShortDateString()}");
+});
+
+// Map a route with a GUID parameter
+app.Map("/guid/{id:guid}", (HttpContext context) =>
+{
+    Guid id = Guid.Parse(context.Request.RouteValues["id"].ToString()!);
+    return context.Response.WriteAsync($"GUID requested: {id}");
+});
+
+app.Map("/username/{username:alpha:minlength(3):maxlength(5)}", (HttpContext context) => 
+{
+    string? username = context.Request.RouteValues["username"]?.ToString()!;
+    if (username != null)
+    {
+        return context.Response.WriteAsync($"Username requested: {username}");
+    }
+    else
+    {
+        return context.Response.WriteAsync("Invalid username request");
+    }
+});
+
+app.Map("/age/{age:int:range(18,100)}", (HttpContext context) =>
+{
+    //int age = Convert.ToInt32(context.Request.RouteValues["age"]);
+    float age = float.Parse(context.Request.RouteValues["age"]?.ToString()!);
+    return context.Response.WriteAsync($"Age requested: {age}");
 });
 
 app.Run(async (HttpContext context) =>
