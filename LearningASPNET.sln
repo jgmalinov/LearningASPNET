@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareLogin", "Middlewa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Routing", "Routing\Routing.csproj", "{DD20E191-F207-43A1-8999-32073B6223D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Routing-CountriesApp", "Routing-CountriesApp\Routing-CountriesApp.csproj", "{30DFEF8A-10BF-4939-B480-70E38D5DCCD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DD20E191-F207-43A1-8999-32073B6223D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD20E191-F207-43A1-8999-32073B6223D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD20E191-F207-43A1-8999-32073B6223D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30DFEF8A-10BF-4939-B480-70E38D5DCCD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30DFEF8A-10BF-4939-B480-70E38D5DCCD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30DFEF8A-10BF-4939-B480-70E38D5DCCD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30DFEF8A-10BF-4939-B480-70E38D5DCCD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

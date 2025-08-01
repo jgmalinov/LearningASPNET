@@ -1,7 +1,24 @@
-var builder = WebApplication.CreateBuilder(args);
+using Routing.CustomConstraints;
+
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
+{
+    WebRootPath = "CustomWebRoot1",
+});
+builder.Services.AddRouting(options =>
+{
+    options.ConstraintMap.Add("months", typeof(MonthsCustomConstraint));
+});
+
 var app = builder.Build();
 
 // It is only after the UseRouting call that endpoints become recognized
+
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+        Path.Combine(app.Environment.ContentRootPath, "CustomWebRoot2"))
+});
 app.UseRouting();
 
 app.Use(async (context, next) =>
@@ -93,6 +110,29 @@ app.Map("/age/{age:int:range(18,100)}", (HttpContext context) =>
     //int age = Convert.ToInt32(context.Request.RouteValues["age"]);
     float age = float.Parse(context.Request.RouteValues["age"]?.ToString()!);
     return context.Response.WriteAsync($"Age requested: {age}");
+});
+
+app.Map("/months/{month:months}", (HttpContext context) =>
+{
+    string? month = context.Request.RouteValues["month"]!.ToString()!;
+    if (month != null)
+    {
+        return context.Response.WriteAsync($"Month requested: {month}");
+    }
+    else
+    {
+        return context.Response.WriteAsync("Invalid month request");
+    }
+});
+
+app.Map("/months/{month}", (HttpContext context) =>
+{
+    return context.Response.WriteAsync("This has least precendence as it is parameterized and does not have constraints.");
+});
+
+app.Map("/months/dec", (HttpContext context) =>
+{
+    return context.Response.WriteAsync("This takes precendence over any parameterized value due to being literal.");
 });
 
 app.Run(async (HttpContext context) =>
