@@ -20,8 +20,17 @@ namespace Controllers_IActionResult.Controllers
             int id = Convert.ToInt32(Request.Query["id"]);
             if (id < 0 || id > 1000)
             {
-                Response.StatusCode = 400;
-                return Content("Id must be in the range of 1-1000");
+                //Response.StatusCode = 404;
+                //return Content("Id must be in the range of 1-1000");
+
+                // Output formatter will set this to text/plain:
+                //return NotFound("Id must be in the range of 1-1000");
+                
+
+                // This will be formatted to JSON. ObjectResult goes through output formatting, ContentResult 
+                // does not. Format needs to be set. 
+                object responseObj = new { msg = "Id must be in the range of 1-1000" };
+                return NotFound(responseObj);
             }
             if (!Request.Query.ContainsKey("authenticated") || 
                 string.IsNullOrEmpty(Convert.ToString(Request.Query["authenticated"])))
@@ -32,11 +41,13 @@ namespace Controllers_IActionResult.Controllers
             bool isAuthenticated = Convert.ToBoolean(Request.Query["authenticated"]);
             if (!isAuthenticated)
             {
-                Response.StatusCode = 401;
-                return Content("401 - Unauthorized");
+                //Response.StatusCode = 401;
+                //return Content("401 - Unauthorized");
+                //return StatusCode(401);
+                return Unauthorized("Please go through the authentication process to gain access to this resource");
             }
 
-            return File("/ExampleRelative.txt", "text/plain");
+            return new RedirectToActionResult("Book", "Store",  new { id = id }, true);
         }
     }
 }
