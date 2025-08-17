@@ -19,7 +19,7 @@ namespace ModelBindingAndValidations.Controllers
         };
 
         [Route("book/{id:int?}/{isloggedin:bool?}")]
-        public IActionResult Index(int? id, bool? isloggedin)
+        public IActionResult Index([FromRoute] int? id, [FromQuery] bool? isloggedin)
         {
             if (id == null)
             {
