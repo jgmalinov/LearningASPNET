@@ -47,7 +47,41 @@ namespace Controllers_IActionResult.Controllers
                 return Unauthorized("Please go through the authentication process to gain access to this resource");
             }
 
-            return new RedirectToActionResult("Book", "Store",  new { id = id }, true);
+            // TEMPORARY REDIRECT - 302 - FOUND
+
+            // I. Passing Controller/Action names
+
+            // Result object
+            // return new RedirectToActionResult("Book", "Store",  new { id = id }, false);
+
+            // Controller class method
+            // return RedirectToAction("Book", "Store", new { id = id });
+
+            // II. Passing URL
+
+            // Local URL
+            // return LocalRedirect($"/store/book/{id}");
+
+            // Remote or local URL
+            // return Redirect($"/store/book/{id}");
+
+            // PERMANENT REDIRECT - 301 - MOVED PERMANENTLY
+
+            // I. Passing Controller/Action names
+
+            // Result Object
+            // return new RedirectToActionResult("Book", "Store", new { id = id }, true);
+
+            // Controller class method
+            // return RedirectToActionPermanent("Book", "Store", new { id = id });
+
+            // II. Passing URL
+
+            // Local URL
+            // return LocalRedirectPermanent($"/store/book/{id}");
+
+            // Remote or Local URL
+            return RedirectPermanent($"/store/book/{id}");
         }
     }
 }
