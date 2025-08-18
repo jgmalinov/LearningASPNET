@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ModelBinding.Models;
 
-namespace ModelBindingAndValidations.Controllers
+namespace ModelBinding.Controllers
 {
     public class BookController : Controller
     {
@@ -19,7 +20,7 @@ namespace ModelBindingAndValidations.Controllers
         };
 
         [Route("book/{id:int?}/{isloggedin:bool?}")]
-        public IActionResult Index([FromRoute] int? id, [FromQuery] bool? isloggedin)
+        public IActionResult Index([FromRoute] int? id, [FromQuery] bool? isloggedin, Book? book)
         {
             if (id == null)
             {
@@ -38,8 +39,7 @@ namespace ModelBindingAndValidations.Controllers
                 return Unauthorized();
             }
 
-            string book = books[Convert.ToInt32(id)];
-            return Content(book, "text/plain");
+            return Content($"{book}", "text/plain");
         }
     }
 }

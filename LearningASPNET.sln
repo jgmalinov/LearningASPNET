@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers&IActionResult",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers-BankApp", "Controllers-BankApp\Controllers-BankApp.csproj", "{6525A847-AF69-4C9F-9531-5CA231A811AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelBindingAndValidations", "ModelBindingAndValidations\ModelBindingAndValidations.csproj", "{624C3DDC-F5DD-4721-BD12-A322EF759697}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelBinding", "ModelBindingAndValidations\ModelBinding.csproj", "{624C3DDC-F5DD-4721-BD12-A322EF759697}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelValidations", "ModelValidations\ModelValidations.csproj", "{183CD3F1-4F02-468C-9206-7A27B6EAACA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{624C3DDC-F5DD-4721-BD12-A322EF759697}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{624C3DDC-F5DD-4721-BD12-A322EF759697}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{624C3DDC-F5DD-4721-BD12-A322EF759697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{183CD3F1-4F02-468C-9206-7A27B6EAACA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{183CD3F1-4F02-468C-9206-7A27B6EAACA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{183CD3F1-4F02-468C-9206-7A27B6EAACA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{183CD3F1-4F02-468C-9206-7A27B6EAACA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
