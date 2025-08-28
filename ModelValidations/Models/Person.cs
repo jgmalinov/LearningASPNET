@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ModelValidations.CustomValidationAttributes;
 
 namespace ModelValidations.Models
 {
-    public class Person
+    public class Person: IValidatableObject
     {
         [DisplayName("Person's First Name")]
         [Required(ErrorMessage = "REQUIRED")]
@@ -13,7 +14,10 @@ namespace ModelValidations.Models
 
         [Required]
         [MinimumYearOfBirth(2005, ErrorMessage = "Custom Error Message - YOB must be earlier than {0}")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+
+        [BindNever]
+        public int? Age { get; set; }
 
         [EmailAddress(ErrorMessage = "{0} must be a valid email address format")]
         public string? Email { get; set; }
@@ -45,6 +49,14 @@ namespace ModelValidations.Models
         {
             return $"Name: {Name}\nEmail: {Email}\nAddress: {Address}\nPassword: {Password}\n" +
                 $"Confirm Password: {ConfirmPassword}\nNet Worth: {NetWorthInThousands}k\n";
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (DateOfBirth is null && Age is null)
+            {
+                yield return new ValidationResult("Either DateOfBirth or Age is required", new List<string> { "DateOfBirth", "Age" });
+            }
         }
     }
 }
