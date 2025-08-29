@@ -21,9 +21,15 @@ namespace ModelBinding.Controllers
         };
 
         [Route("book/{id:int?}/{isloggedin:bool?}")]
-        public IActionResult Index([FromRoute] int? id, [FromQuery] bool? isloggedin, 
-            /*[Bind(nameof(Book.Name), nameof(Book.Author))] */ 
-            [ModelBinder(BinderType = typeof(BookModelBinder))] Book? book)
+        public IActionResult Index([FromRoute] int? id, [FromQuery] bool? isloggedin,
+            //Customize default binding behavior
+            /*[Bind(nameof(Book.Name), nameof(Book.Author))]
+            
+            // Or use a custom model binder
+            [ModelBinder(BinderType = typeof(BookModelBinder))]*/
+
+            // Or use a custom model binder provider
+            Book? book)
         {
             if (id == null)
             {
