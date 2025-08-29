@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ModelBinding.CustomModelBinders;
 using ModelBinding.Models;
 
 namespace ModelBinding.Controllers
@@ -20,7 +21,9 @@ namespace ModelBinding.Controllers
         };
 
         [Route("book/{id:int?}/{isloggedin:bool?}")]
-        public IActionResult Index([FromRoute] int? id, [FromQuery] bool? isloggedin, Book? book)
+        public IActionResult Index([FromRoute] int? id, [FromQuery] bool? isloggedin, 
+            /*[Bind(nameof(Book.Name), nameof(Book.Author))] */ 
+            [ModelBinder(BinderType = typeof(BookModelBinder))] Book? book)
         {
             if (id == null)
             {

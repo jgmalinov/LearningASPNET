@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ModelBinding.Models
 {
@@ -9,6 +10,9 @@ namespace ModelBinding.Models
         // This does not work for GET requests - [FromBody]
         public string Name { get; set; }
         public string Author { get; set; }
+        
+        [BindNever]
+        public string Description { get; set; }
         public override string ToString()
         {
             return $"'{Name}' by {Author}";
