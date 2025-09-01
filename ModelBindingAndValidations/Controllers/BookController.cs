@@ -29,7 +29,10 @@ namespace ModelBinding.Controllers
             [ModelBinder(BinderType = typeof(BookModelBinder))]*/
 
             // Or use a custom model binder provider
-            Book? book)
+
+            // To Bind to a collection parameter/property, index its multiple entries into the form client-side
+            // E.g. Tags[0], Tags[1] etc. for a List<string> Tags property.
+            Book? book, List<string?> Tags, [FromHeader(Name = "User-Agent")] string UserAgent)
         {
             if (id == null)
             {
@@ -48,6 +51,13 @@ namespace ModelBinding.Controllers
                 return Unauthorized();
             }
 
+            return Content($"{book}, Client: {UserAgent}", "text/plain");
+        }
+
+        [Route("/json/{id:int}")]
+        // FromBody resolves to BodyModelBinder which invokes the configured input formatters to parse the request body
+        public IActionResult JsonBookRequest([FromBody] Book book)
+        {
             return Content($"{book}", "text/plain");
         }
     }
