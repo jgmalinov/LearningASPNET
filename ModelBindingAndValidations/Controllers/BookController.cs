@@ -54,8 +54,10 @@ namespace ModelBinding.Controllers
             return Content($"{book}, Client: {UserAgent}", "text/plain");
         }
 
-        [Route("/json/{id:int}")]
+        [Route("/json")]
         // FromBody resolves to BodyModelBinder which invokes the configured input formatters to parse the request body
+        // This resolves both JSON and XML request bodies, if the XML formatter is configured in Program.cs
+        // If you do not add the [FromBody] attribute, the default binding soources (route, query, form, header, service) are used
         public IActionResult JsonBookRequest([FromBody] Book book)
         {
             return Content($"{book}", "text/plain");
