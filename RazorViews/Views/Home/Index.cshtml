@@ -2,28 +2,30 @@
 
 @{
     string title = "Razor Views Example";
-    List<Person> people= new List<Person> 
-    { 
-        new Person() { Name = "John", DateOfBirth = Convert.ToDateTime("2005-12-05"), Gender = Gender.Male },
-        new Person() { Name = "Jane", DateOfBirth = Convert.ToDateTime("2010-10-12"), Gender = Gender.Female },
-        new Person() { Name = "Sam", Gender = Gender.Male }
-    };
 }
 
 @* You can define methods, fields and properties here, which will be added to the underlying View class that the framework generates*@
 @functions{
-    string calculateAge(Person person)
-    {
-        if (person.DateOfBirth.HasValue)
+        string calculateAge(Person person)
         {
-            int age = DateTime.Now.Year - person.DateOfBirth.Value.Year;
-            person.Age = age;
-            return $"<p>Based on my calculations, you are {person.Age} years old!</p>";
-        } else
-        {
-            return "<p> No date of birth passed to the person object, cannot calculate age without it.</p>";
+            if (person.DateOfBirth.HasValue)
+            {
+                int age = DateTime.Now.Year - person.DateOfBirth.Value.Year;
+                person.Age = age;
+                return $"<p>Based on my calculations, you are {person.Age} years old!</p>";
+            } else
+            {
+                return "<p> No date of birth passed to the person object, cannot calculate age without it.</p>";
+            }
         }
-    }
+        static List<Person> people = new List<Person>
+        {
+            new Person() { Name = "John", DateOfBirth = Convert.ToDateTime("2005-12-05"), Gender = Gender.Male },
+            new Person() { Name = "Jane", DateOfBirth = Convert.ToDateTime("2010-10-12"), Gender = Gender.Female },
+            new Person() { Name = "Sam", Gender = Gender.Male }
+        };
+
+        string peopleCount = $"<script>alert('There are {people.Count} people in the list');</script>";
 }
 <!doctype html>
 <html lang="en">
@@ -39,6 +41,7 @@
     <main>
         <h1>Hello, Everyone!</h1>
         <p>Welcome to ASP.NET Core!</p>
+        @Html.Raw(peopleCount)
 
         @foreach (var person in people)
         {
