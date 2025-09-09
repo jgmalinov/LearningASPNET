@@ -2,7 +2,28 @@
 
 @{
     string title = "Razor Views Example";
-    Person person = new Person { Name = "John", DateOfBirth = Convert.ToDateTime("2005-12-05"), Gender = Gender.Male };
+    List<Person> people= new List<Person> 
+    { 
+        new Person() { Name = "John", DateOfBirth = Convert.ToDateTime("2005-12-05"), Gender = Gender.Male },
+        new Person() { Name = "Jane", DateOfBirth = Convert.ToDateTime("2010-10-12"), Gender = Gender.Female },
+        new Person() { Name = "Sam", Gender = Gender.Male }
+    };
+}
+
+@* You can define methods, fields and properties here, which will be added to the underlying View class that the framework generates*@
+@functions{
+    string calculateAge(Person person)
+    {
+        if (person.DateOfBirth.HasValue)
+        {
+            int age = DateTime.Now.Year - person.DateOfBirth.Value.Year;
+            person.Age = age;
+            return $"<p>Based on my calculations, you are {person.Age} years old!</p>";
+        } else
+        {
+            return "<p> No date of birth passed to the person object, cannot calculate age without it.</p>";
+        }
+    }
 }
 <!doctype html>
 <html lang="en">
@@ -10,36 +31,39 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RazorPages</title>
+    <title>@title</title>
     <meta name="description" content="Welcome to Razor Pages!" />
     <link rel="icon" href="favicon.ico" />
 </head>
 <body>
     <main>
-        <h1>Hello, @person.Name!</h1>
+        <h1>Hello, Everyone!</h1>
         <p>Welcome to ASP.NET Core!</p>
 
-        @if (person.DateOfBirth.HasValue)
+        @foreach (var person in people)
         {
-            int age = DateTime.Now.Year - person.DateOfBirth.Value.Year;
-            person.Age = age;
-            <p>Based on my calculations, you are @person.Age years old!</p>
-        } else
-        {
-            <p>No date of birth passed to the person object, cannot calculate age without it.</p>
+            <h2>@person.Name, @person.Gender</h2>
+            @switch (person.Gender)
+            {
+                case Gender.Male:
+                    <h2>Gender: Male</h2>
+                    break;
+                case Gender.Female:
+                    <h2>Gender: Female</h2>
+                    break;
+                default:
+                    <h2>Gender: Unknown</h2>
+                    break;
+            }
+            @Html.Raw(calculateAge(person));
         }
 
-        @switch(person.Gender)
+        @for (int i=0; i < 2; i++)
         {
-            case Gender.Male:
-                <p>Gender: Male</p>
-                break;
-            case Gender.Female:
-                <p>Gender: Female</p>
-                break;
-            default:
-                <p>Gender: Unknown</p>
-                break;
+            @: This is going to be interpreted as literal text even though it is in a C# code block
+            <text>This is also going to be interpreted literally.</text>
+            var person = people[i];
+            <h2>@person.Name is born on @person.DateOfBirth</h2>
         }
     </main>
 </body>
