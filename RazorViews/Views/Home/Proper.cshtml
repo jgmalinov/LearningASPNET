@@ -1,14 +1,14 @@
 ﻿@using RazorViews.Models
 
 @{
-    List<Person>? people = (List<Person>?)ViewData["People"];
+    //List<Person>? people = (List<Person>?)ViewData["People"];
     string calculateAge(Person person)
     {
         if (person.DateOfBirth.HasValue)
         {
             int age = DateTime.Now.Year - person.DateOfBirth.Value.Year;
             person.Age = age;
-            return $"<td>Based on my calculations, you are {person.Age} years old!</td>";
+            return $"<td>Having been born on {person.DateOfBirth?.ToShortDateString()}, you are {person.Age} years old!</td>";
         }
         else
         {
@@ -25,7 +25,7 @@
     </head>
     <body>
         <div class="page-content">
-            @foreach (Person person in people)
+            @foreach (Person person in ViewBag.People)
             {
                 <div class="box float-left w-50">
                     <h3>Name: @person.Name</h3>

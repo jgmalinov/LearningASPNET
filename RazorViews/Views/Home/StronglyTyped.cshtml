@@ -1,0 +1,49 @@
+﻿@using RazorViews.Models
+@model List<Person>;
+
+@{
+    //List<Person>? people = (List<Person>?)ViewData["People"];
+    string calculateAge(Person person)
+    {
+        if (person.DateOfBirth.HasValue)
+        {
+            int age = DateTime.Now.Year - person.DateOfBirth.Value.Year;
+            person.Age = age;
+            return $"<td>Having been born on {person.DateOfBirth?.ToShortDateString()}, you are {person.Age} years old!</td>";
+        }
+        else
+        {
+            return "<td>No date of birth passed to the person object, cannot calculate age without it.</td>";
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page-content">
+        @foreach (Person person in Model)
+        {
+            <div class="box float-left w-50">
+                <h3>Name: @person.Name</h3>
+                <table class="table w-100">
+                    <tbody>
+                        <tr>
+                            <td>Gender</td>
+                            <td>@person.Gender</td>
+                        </tr>
+                        <tr>
+                            <td>Age</td>
+                            @Html.Raw(calculateAge(person))
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</body>
+</html>

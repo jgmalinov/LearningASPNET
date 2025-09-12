@@ -1,0 +1,51 @@
+﻿@using RazorViews.Models
+@model Person;
+
+@{
+    string title = "Razor Views Example - Person Details";
+    string calculateAge(Person person)
+    {
+        if (person.DateOfBirth.HasValue)
+        {
+            int age = DateTime.Now.Year - person.DateOfBirth.Value.Year;
+            person.Age = age;
+            return Convert.ToString(person.Age);
+        }
+        else
+        {
+            return "Cannot calculate age without DOB";
+        }
+    }
+}
+
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>@title</title>
+        <link href="~/StyleSheet.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="page-content">
+            <div class="box float-left">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Date Of Birth</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.Name</td>
+                            <td>@Model.Gender</td>
+                            <td>@(Model.DateOfBirth?.ToShortDateString() ?? "No date of birth entry")</td>
+                            <td>@calculateAge(Model)</td>
+                        </tr>
+                    <tr>
+                </table>
+            </div>
+        </div>
+    </body>
+    </html>
