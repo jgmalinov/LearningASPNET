@@ -1,0 +1,14 @@
+﻿@using RazorViews.Models
+@model InstrumentPersonViewModel
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>@Model.Person.Name's Instrument</title>
+    </head>
+    <body>
+    <h1>@Model.Person.Name's @Model.Instrument.Name</h1>
+    <p>@Model.Person.Name played a @Model.Instrument.Brand @Model.Instrument.Type.ToString() named @Model.Instrument.Name</p>
+    <p>The @Model.Instrument.Type costs @Model.Instrument.Price</p>
+    <a href="/Home/StronglyTyped">Back to Home</a>
+    </body>
+    </html>
