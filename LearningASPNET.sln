@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelValidations", "ModelVa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorViews", "RazorViews\RazorViews.csproj", "{C658243D-65DF-4702-A2FF-9B523354D020}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersApp", "OrdersApp\OrdersApp.csproj", "{051758B6-DFA1-40EF-93A0-089659BEEDCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{C658243D-65DF-4702-A2FF-9B523354D020}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C658243D-65DF-4702-A2FF-9B523354D020}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C658243D-65DF-4702-A2FF-9B523354D020}.Release|Any CPU.Build.0 = Release|Any CPU
+		{051758B6-DFA1-40EF-93A0-089659BEEDCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051758B6-DFA1-40EF-93A0-089659BEEDCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{051758B6-DFA1-40EF-93A0-089659BEEDCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051758B6-DFA1-40EF-93A0-089659BEEDCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
