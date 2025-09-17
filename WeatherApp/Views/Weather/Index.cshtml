@@ -1,0 +1,42 @@
+﻿@model List<CityWeather>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WeatherApp</title>
+        <meta charset="utf-8" />
+        <link href="~/StyleSheet.css" rel="stylesheet" />
+    </head>
+    <body>
+    <h1>Weather</h1>
+        <div class="weather-container">
+            @foreach (var weather in Model)
+            {
+                <div class="weather-box">
+                    <div class="weather-left">
+                        <h3>@weather.CityName</h3>
+                        <p>@weather.DateAndTime</p>
+                        <a href="/@weather.CityUniqueCode">Details</a>
+                    </div>
+                    <div class="weather-right">
+                    <h3 class="temperature">@weather.TemperatureFahrenheit &#8457;</h3>
+                    </div>
+                </div>
+            }
+        </div>
+    </body>
+</html>
+<script>
+    document.querySelectorAll('.temperature').forEach(temp => {
+        var box = temp.parentElement.parentElement;
+        var fahrenheit = parseInt(temp.textContent.split(" ")[0])
+        if (fahrenheit < 44)
+        {
+            box.style.backgroundColor = '#a8c5f0';
+        } else if (fahrenheit >= 44 && fahrenheit <= 74)
+        {
+            box.style.backgroundColor = '#fff3b0'
+        } else {
+            box.style.backgroundColor = '#f7b267';
+        }
+    });
+</script>

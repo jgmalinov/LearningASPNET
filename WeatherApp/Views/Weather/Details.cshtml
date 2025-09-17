@@ -1,0 +1,39 @@
+﻿@model CityWeather
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Details - @Model.CityUniqueCode</title>
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="page-content">
+    <h1>Details - @Model.CityName</h1>
+    <div class="weather-box w-30">
+        <div class="weather-left">
+            <h2>@Model.CityName</h2>
+            <p>@Model.DateAndTime</p>
+        </div>
+        <div class="weather-right">
+            <h2 class="temperature">@Model.TemperatureFahrenheit &#8457;</h2>
+        </div>
+    </div>
+    <a href="/">Back to Home</a>
+</div>
+</body>
+</html>
+<script>
+    document.querySelectorAll('.temperature').forEach(temp => {
+        var box = temp.parentElement.parentElement;
+        var fahrenheit = parseInt(temp.textContent.split(" ")[0])
+        if (fahrenheit < 44)
+        {
+            box.style.backgroundColor = '#a8c5f0';
+        } else if (fahrenheit >= 44 && fahrenheit <= 74)
+        {
+            box.style.backgroundColor = '#fff3b0'
+        } else {
+            box.style.backgroundColor = '#f7b267';
+        }
+    });
+</script>
