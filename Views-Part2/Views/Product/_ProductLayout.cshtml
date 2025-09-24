@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
-}
+} 
+
 <!DOCTYPE html>
 
 <html>
@@ -11,7 +12,7 @@
 </head>
 <header class="container">
     <div class="navbar">
-        <div class="navbar-brand">ASP.NET Core</div>
+        <div class="navbar-brand">Product ID: @ViewBag.ProductId</div>
             <ul>
                 <li><a href="/">Home</a> |</li>
                 <li><a href="/About">About</a> |</li>
@@ -27,9 +28,6 @@
     <div>
         <h1>@ViewBag.Title</h1>
         @RenderBody()
-    </div>
-    <div class="footer-content">
-        @RenderSection("Scripts", required: false)
     </div>
 </body>
 </html>
